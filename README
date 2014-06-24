@@ -1,0 +1,6 @@
+Trace service discovery
+
+Uses Avahi to announce the service _lttng._tcp on the local network.
+
+Run-time dependencies : libavahi-client3 avahi-daemon
+Build dependencies : libavahi-client-dev libavahi-common-dev
