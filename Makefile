@@ -1,7 +1,6 @@
 CC=gcc
 CFLAGS=-I.
 TARGET = tracesd
-OBJ = tracesd.o
 LIBS=-lavahi-client -lavahi-common
 PREFIX = $(DESTDIR)/usr/local
 BINDIR = $(PREFIX)/bin
@@ -10,11 +9,11 @@ OBJECTS = $(SOURCES:.c=.o)
 
 all: $(TARGET)
 
-$(TARGET): $(OBJECTS) $(COMMON)
-	  $(CC) $(FLAGS) $(CFLAGS) $(DEBUGFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS)
+tracesd: tracesd.c
+	  $(CC) $(FLAGS) $(CFLAGS) $(DEBUGFLAGS) -o $@ $@.c $(LIBS)
 
 install:
-	install -D $(TARGET) $(BINDIR)/$(TARGET)
+	install -D tracesd $(BINDIR)/tracesd
 
 clean:
-	rm -f $(OBJECTS) $(TARGET)
+	rm -f $(TARGET)
