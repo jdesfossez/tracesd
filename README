@@ -4,3 +4,6 @@ Uses Avahi to announce the service _lttng._tcp on the local network.
 
 Run-time dependencies : libavahi-client3 avahi-daemon
 Build dependencies : libavahi-client-dev libavahi-common-dev
+
+To list the LTTng tracers available (requires avahi-utils) :
+$ avahi-browse _lttng._tcp -r -p
