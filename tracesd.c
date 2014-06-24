@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <unistd.h>
 
 #include <avahi-client/client.h>
 #include <avahi-client/publish.h>
@@ -219,6 +220,7 @@ int main (AVAHI_GCC_UNUSED int argc, AVAHI_GCC_UNUSED char *argv[])
 	int error;
 	int ret = 1;
 	struct timeval tv;
+	char hostname[HOST_NAME_MAX];
 
 	/* Allocate main loop object */
 	if (!(simple_poll = avahi_simple_poll_new ())) {
@@ -226,7 +228,12 @@ int main (AVAHI_GCC_UNUSED int argc, AVAHI_GCC_UNUSED char *argv[])
 		goto fail;
 	}
 
-	name = avahi_strdup ("lttng");
+	ret = gethostname(hostname, HOST_NAME_MAX);
+	if (ret < 0) {
+		fprintf(stderr, "Failed to get hostname\n");
+		goto fail;
+	}
+	name = hostname;
 
 	/* Allocate a new client */
 	client = avahi_client_new (avahi_simple_poll_get (simple_poll), 0,
