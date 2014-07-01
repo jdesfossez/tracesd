@@ -11,6 +11,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.path = "scripts/deploy.sh"
     s.args = ENV['TRACEVISOR_IP']
   end
-  config.vm.provision "shell", path: "scripts/deploy-lttng.sh"
+  config.vm.provision "shell", path: "scripts/deploy-lttng-source.sh"
   config.vm.network "private_network", type: "dhcp"
 end
